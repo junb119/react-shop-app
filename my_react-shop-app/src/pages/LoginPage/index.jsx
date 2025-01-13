@@ -3,8 +3,8 @@ import SignIn from "./sign-in/SignIn";
 
 const LoginPage = () => {
   return (
-    <div>
-      <div>
+    <div className="page">
+      <div className="form_container">
         <h1>로그인</h1>
         <SignIn />
         <p>
