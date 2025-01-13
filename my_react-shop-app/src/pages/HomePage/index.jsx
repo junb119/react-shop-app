@@ -8,4 +8,4 @@ const HomePage = () => {
   )
 }
 
-export default DetailPage
+export default HomePage
