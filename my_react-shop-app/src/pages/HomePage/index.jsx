@@ -7,13 +7,10 @@ const HomePage = () => {
   return (
     <div className="page">
       <div className="container">
-        <h1>
-        Products
-        </h1>
-          <FiltersCategory />
-          <CountProducts />
-          <CardList />
-          <CardSkeleton />
+        <h1>Products</h1>
+        <FiltersCategory />
+        <CountProducts />
+        <CardList />
       </div>
     </div>
   );
