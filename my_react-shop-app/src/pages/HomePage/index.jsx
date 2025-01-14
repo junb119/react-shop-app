@@ -8,11 +8,12 @@ const HomePage = () => {
     <div className="page">
       <div className="container">
         <h1>
+        Products
+        </h1>
           <FiltersCategory />
           <CountProducts />
           <CardList />
           <CardSkeleton />
-        </h1>
       </div>
     </div>
   );
