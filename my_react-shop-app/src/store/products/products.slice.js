@@ -1,12 +1,20 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { useAppSelector } from "../../hooks/redux";
 
 export const fetchProducts = createAsyncThunk(
   "products/fetchProducts",
-  async (_, thunkAPI) => {
+  async (category, thunkAPI) => {
     console.log("thunkAPI", thunkAPI);
     try {
-      const response = await axios.get("https://fakestoreapi.com/products");
+      let response;
+      if (category) {
+        response = await axios.get(
+          `https://fakestoreapi.com/products/category/${category}`
+        );
+      } else {
+        response = await axios.get("https://fakestoreapi.com/products");
+      }
       console.log("response", response);
 
       return response.data;
