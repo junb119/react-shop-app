@@ -22,7 +22,7 @@ const SignIn = () => {
             id: userCredential.user.uid,
           })
         );
-        dispatch(setUserId(userCredential.useruid));
+        dispatch(setUserId(userCredential.user.uid));
         navigate("/");
       })
       .catch((error) => {

@@ -1,6 +1,6 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth";
-import OrderList from "./orders-list/OrderList";
+import OrderList from "./orders-list/OrdersList";
 
 const OrderPage = () => {
   const { isAuth } = useAuth();
