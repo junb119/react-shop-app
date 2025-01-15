@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 import { useAppdispatch, useAppSelector } from "../../../hooks/redux";
-import { getTotalPrice } from "../../../store/cart/cart.slice";
+import {
+  getTotalPrice,
+  postOrder,
+  sendOrder,
+} from "../../../store/cart/cart.slice";
 import { Link } from "react-router-dom";
 import styles from "./Checkout.module.scss";
 import { useAuth } from "../../../hooks/useAuth";
@@ -13,6 +17,9 @@ const Checkout = () => {
   }, [cart]);
 
   const { isAuth } = useAuth();
+  const sendOrder = () => {
+    dispatch(postOrder(cart));
+  };
   return (
     <div className={styles.checkout}>
       <div>
@@ -23,7 +30,7 @@ const Checkout = () => {
         {isAuth ? (
           <button
             className={styles.checkout_button}
-            // onClick={() => sendOrder()}
+            onClick={() => sendOrder()}
           >
             계산하기
           </button>

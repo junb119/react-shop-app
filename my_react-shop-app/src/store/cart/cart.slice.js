@@ -1,4 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 const initialState = {
   products: localStorage.getItem("cartProducts")
@@ -9,7 +10,20 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("userId"))
     : "",
 };
-
+export const postOrder = createAsyncThunk(
+  "cart/postOrder",
+  async (order, thunkAPI) => {
+    try {
+      await axios.post(
+        "https://67879217c4a42c9161076410.mockapi.io/orders",
+        order
+      ); // 주문 데이터 전달하기
+      thunkAPI.dispatch(sendOrder()); // 카트 비워주기
+    } catch (error) {
+      return thunkAPI.rejectWithValue("Error sending order");
+    }
+  }
+);
 export const cartSlice = createSlice({
   name: "cart",
   initialState,
@@ -19,6 +33,7 @@ export const cartSlice = createSlice({
 
       localStorage.setItem("userId", JSON.stringify(state.userId));
     },
+
     removeUserId: (state) => {
       state.userId = "";
 
@@ -71,10 +86,16 @@ export const cartSlice = createSlice({
       );
       return state;
     },
+
+    sendOrder: (state) => {
+      state.products = [];
+      localStorage.setItem("cartProducts", JSON.stringify(state.products));
+    },
   },
 });
 export const {
   addToCart,
+  sendOrder,
   deleteFromCart,
   decrementProduct,
   incrementProduct,
