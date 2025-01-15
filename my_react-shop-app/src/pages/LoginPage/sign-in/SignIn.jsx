@@ -4,6 +4,7 @@ import { useState } from "react";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../store/user/user.slice";
+import { setUserId } from "../../../store/cart/cart.slice";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ const SignIn = () => {
             id: userCredential.user.uid,
           })
         );
+        dispatch(setUserId(userCredential.useruid));
         navigate("/");
       })
       .catch((error) => {

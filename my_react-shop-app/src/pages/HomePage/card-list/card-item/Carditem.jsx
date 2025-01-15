@@ -1,10 +1,17 @@
 import { Link } from "react-router-dom";
-import { useAppSelector } from "../../../../hooks/redux";
+import { useAppdispatch, useAppSelector } from "../../../../hooks/redux";
 import styles from "./CardItem.module.scss";
+import { addToCart } from "../../../../store/cart/cart.slice";
 const Carditem = ({ item }) => {
   const { products } = useAppSelector((state) => state.cartSlice);
   const productMatching = products.some((product) => product.id === item.id);
   //some 배열안의 요소중 판별함수를 하나라도 통과하면 true리턴
+  
+  const dispatch = useAppdispatch()
+  
+  const addItemToCart = ()=> {
+    dispatch(addToCart(item))
+  }
   return (
     <li className={styles.card_item}>
       <Link to={`/product/${item.id}`}>
@@ -17,7 +24,7 @@ const Carditem = ({ item }) => {
       </Link>
       <h5>{item.title.substring(0, 15)}...</h5>
       <div>
-        <button disabled={productMatching}>
+        <button disabled={productMatching} onClick={()=> !productMatching && addItemToCart()}>
           {productMatching ? "장바구니에 담긴 제품" : "장바구니에 담기"}
         </button>
         <p>${item.price}</p>
