@@ -1,10 +1,18 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
+import { fetchProduct } from "../../store/products/product.slice";
+import { useAppdispatch } from "../../hooks/redux";
 
 const DetailPage = () => {
-  return (
-    <div>
-      DetailPage
-    </div>
-  )
-}
+  const { id } = useParams();
+  const productId = Number(id);
+  const dispatch = useAppdispatch();
 
-export default DetailPage
+  useEffect(() => {
+    dispatch(fetchProduct(productId));
+  }, [productId]);
+
+  return <div className="page">DetailPage</div>;
+};
+
+export default DetailPage;
