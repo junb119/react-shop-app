@@ -17,7 +17,7 @@ const initialState: CartState = {
 };
 export const postOrder = createAsyncThunk(
   "cart/postOrder",
-  async (order, thunkAPI) => {
+  async (order:CartState, thunkAPI) => {
     try {
       await axios.post(
         "https://67879217c4a42c9161076410.mockapi.io/orders",

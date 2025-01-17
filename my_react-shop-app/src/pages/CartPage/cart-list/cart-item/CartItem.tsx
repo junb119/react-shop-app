@@ -7,7 +7,12 @@ import {
 } from "../../../../store/cart/cart.slice";
 import { Link } from "react-router-dom";
 import { AiOutlineDelete } from "react-icons/ai";
-const CartItem = ({ item }) => {
+import { IProduct } from "../../../../store/products/products.type";
+import { FC } from "react";
+type CartItemProps = {
+  item : IProduct
+}
+const CartItem:FC<CartItemProps> = ({ item }) => {
   const dispatch = useAppdispatch();
   const deleteProduct = () => {
     dispatch(deleteFromCart(item.id));
