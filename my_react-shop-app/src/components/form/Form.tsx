@@ -1,14 +1,25 @@
-import { useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import styles from "./Form.module.scss";
-const Form = ({ title, getDataForm, firebaseError }) => {
+import { FC } from "react";
+type FormProps = {
+  title: string;
+  getDataForm: (email: string, password: string) => void;
+  firebaseError: string;
+};
+type Inputs = {
+  email: string;
+  password: string;
+};
+
+const Form: FC<FormProps> = ({ title, getDataForm, firebaseError }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm({ mode: "onBlur" });
+  } = useForm<Inputs>({ mode: "onBlur" });
 
-  const onSubmit = ({ email, password }) => {
+  const onSubmit: SubmitHandler<FieldValues> = ({ email, password }) => {
     getDataForm(email, password);
     reset();
   };
@@ -63,7 +74,9 @@ const Form = ({ title, getDataForm, firebaseError }) => {
         )}
       </div>
       <button type="submit">{title}</button>
-      {firebaseError && <span className={styles.form_error}>{firebaseError}</span>}
+      {firebaseError && (
+        <span className={styles.form_error}>{firebaseError}</span>
+      )}
     </form>
   );
 };

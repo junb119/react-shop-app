@@ -1,18 +1,19 @@
 import { useNavigate } from "react-router-dom";
 import Form from "../../../components/form/Form";
 import { useState } from "react";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import app from "../../../firebase";
 import { useDispatch } from "react-redux";
 import { setUser } from "../../../store/user/user.slice";
 import { setUserId } from "../../../store/cart/cart.slice";
-
-const SignIn = () => {
+const SignUp = () => {
   const navigate = useNavigate();
   const [firebaseError, setFirebaseError] = useState("");
+
+  const auth = getAuth(app);
   const dispatch = useDispatch();
-  const auth = getAuth();
-  const handleLogin = (email, password) => {
-    signInWithEmailAndPassword(auth, email, password)
+  const handleSignupAndLogin = (email:string, password:string) => {
+    createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // 리덕스에 유지 데이터 담는 로직
         dispatch(
@@ -33,11 +34,11 @@ const SignIn = () => {
   };
   return (
     <Form
-      title={"로그인"}
-      getDataForm={handleLogin}
+      title={"가입하기"}
+      getDataForm={handleSignupAndLogin}
       firebaseError={firebaseError}
     />
   );
 };
 
-export default SignIn;
+export default SignUp;
