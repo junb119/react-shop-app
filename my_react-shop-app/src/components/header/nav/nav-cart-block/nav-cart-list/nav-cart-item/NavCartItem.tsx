@@ -3,7 +3,12 @@ import { useAppdispatch } from "../../../../../../hooks/redux";
 import { deleteFromCart } from "../../../../../../store/cart/cart.slice";
 import styles from "./NavCartItem.module.scss";
 import { AiOutlineDelete } from "react-icons/ai";
-const NavCartItem = ({ item }) => {
+import { IProduct } from "../../../../../../store/products/products.type";
+import { FC } from "react";
+type NavCartItemProps = {
+  item: IProduct;
+}
+const NavCartItem : FC<NavCartItemProps> = ({ item }) => {
   const dispath = useAppdispatch();
   const deleteProduct = () => {
     dispath(deleteFromCart(item.id));

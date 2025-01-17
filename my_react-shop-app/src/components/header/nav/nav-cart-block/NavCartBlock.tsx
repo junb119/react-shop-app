@@ -9,7 +9,7 @@ const NavCartBlock = () => {
   const dispatch = useAppdispatch();
 
   useEffect(() => {
-    dispatch(getTotalPrice(products));
+    dispatch(getTotalPrice());
   }, [products]);
 
   return (
