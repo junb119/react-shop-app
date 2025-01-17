@@ -1,0 +1,1 @@
+/// <refernce tyupes="vite/client" />
