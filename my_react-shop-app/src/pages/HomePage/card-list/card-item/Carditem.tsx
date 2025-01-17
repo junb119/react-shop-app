@@ -2,7 +2,13 @@ import { Link } from "react-router-dom";
 import { useAppdispatch, useAppSelector } from "../../../../hooks/redux";
 import styles from "./CardItem.module.scss";
 import { addToCart } from "../../../../store/cart/cart.slice";
-const Carditem = ({ item }) => {
+import { IProduct } from "../../../../store/products/products.type";
+import { FC } from "react";
+
+type CardItemProps = {
+  item: IProduct
+}
+const Carditem : FC<CardItemProps> = ({ item }) => {
   const { products } = useAppSelector((state) => state.cartSlice);
   const productMatching = products.some((product) => product.id === item.id);
   //some 배열안의 요소중 판별함수를 하나라도 통과하면 true리턴

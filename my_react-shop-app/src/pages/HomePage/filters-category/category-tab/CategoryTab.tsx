@@ -1,9 +1,14 @@
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { useAppdispatch, useAppSelector } from "../../../../hooks/redux";
 import { setActiveCategory } from "../../../../store/categories/categories.slice";
 import styles from "./CategoryTab.module.scss";
-import { fetchProducts } from "../../../../store/products/products.slice";
-const CategoryTab = ({ text, categoryName }) => {
+import { CategoriesName } from "../../../../store/categories/categories.type";
+
+type CategoryTabProps = {
+  text: string;
+  categoryName: CategoriesName;
+}
+const CategoryTab:FC<CategoryTabProps> = ({ text, categoryName }) => {
   const dispatch = useAppdispatch();
   const category = useAppSelector((state) => state.categoriesSlice);
 
